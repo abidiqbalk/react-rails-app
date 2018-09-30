@@ -91,8 +91,8 @@ class ItemsContainer extends React.Component {
     render(){
         return(
             <div>
-                <NewItem handleFormSubmit = {this.handleFormSubmit}/>
-                <AllItems items={this.state.items} handleDelete={this.handleDelete} handleUpdate = {this.handleUpdate}/>
+              <NewItem handleFormSubmit = {this.handleFormSubmit}/>
+              <AllItems items={this.state.items} handleDelete={this.handleDelete} handleUpdate = {this.handleUpdate}/>
             </div>
         )
     }

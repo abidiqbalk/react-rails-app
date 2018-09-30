@@ -1,5 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
+
 class Item extends React.Component {
     constructor(props){
         super(props);
@@ -24,8 +25,11 @@ class Item extends React.Component {
       let name = this.state.editable ? <input type='text' ref={input => this.name = input} defaultValue={this.props.item.name}/>:<span>{this.props.item.name}</span>
       let description = this.state.editable ? <input type='text' ref={input => this.description = input} defaultValue={this.props.item.description}/>:<span>{this.props.item.description}</span>
     return (
-        <div>
-            <p>{name} {description} |<button onClick={(e) =>this.handleEdit()}>{this.state.editable? 'Submit' : 'Edit'}</button>| <a href='#' onClick={e =>this.props.handleDelete(e,this.props.item.id)}>Delete</a></p>
+        <div >
+            <div className='d-flex w-100 justify-content-between'><h5 class="mb-1">{name}</h5></div>
+            <p className="mb-1"> {description}</p>
+            <span className="badge badge-success badge-pill">Available</span>
+            |<button  onClick={(e) =>this.handleEdit()}>{this.state.editable? 'Submit' : 'Edit'}</button>| <a href='#' onClick={e =>this.props.handleDelete(e,this.props.item.id)}>Delete</a>
         </div>
     );
   }
