@@ -5,3 +5,4 @@ development:
   pool: 5
   username: postgres
   password: password
+  port: 5432

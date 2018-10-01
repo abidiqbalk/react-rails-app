@@ -21,6 +21,7 @@ class ItemsContainer extends React.Component {
             item:item
         })
         .then(response => {
+            return response
         })
         .then((item)=>{
             this.updateItem(item.data)
