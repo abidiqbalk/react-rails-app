@@ -50,7 +50,7 @@ class ItemsContainer extends React.Component {
         })
     }
     handleFormSubmit(name,description,status){
-        axios.post('http://localhost:3000/api/v1/items',
+        axios.post('/api/v1/items',
             {item: {name: name, description:description,status:status} }
         )
         .then(function (response) {
@@ -89,7 +89,7 @@ class ItemsContainer extends React.Component {
         })
     }
     componentDidMount(){
-        axios.get('http://localhost:3000/api/v1/items')
+        axios.get('/api/v1/items')
             .then(response => {
                 console.log(response)
                 this.setState({items: response.data})
