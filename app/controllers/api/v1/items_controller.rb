@@ -3,7 +3,9 @@ class Api::V1::ItemsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @items=Item.all
+    parsed =params[:q]? JSON.parse(params[:q]) :params[:q]
+    @q = Item.ransack(parsed)
+    @items = @q.result(distinct: true).order(id: :desc)
     json_response(@items)
   end
 

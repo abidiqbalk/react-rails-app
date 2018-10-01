@@ -14,6 +14,18 @@ class ItemsContainer extends React.Component {
         this.deleteItem = this.deleteItem.bind(this)
         this.handleUpdate = this.handleUpdate.bind(this);
         this.updateItem = this.updateItem.bind(this)
+        this.triggerSearch = this.triggerSearch.bind(this)
+
+    }
+    triggerSearch(query){
+        const params={
+            "q":{"name_cont":query}
+        }
+        axios.get('/api/v1/items?q',{params})
+            .then(response => {
+                this.setState({items: response.data})
+            })
+            .catch(error => console.log(error))
 
     }
     handleUpdate(item){
@@ -92,7 +104,7 @@ class ItemsContainer extends React.Component {
     render(){
         return(
             <div>
-              <NewItem handleFormSubmit = {this.handleFormSubmit}/>
+              <NewItem handleFormSubmit = {this.handleFormSubmit} triggerSearch ={this.triggerSearch} />
               <AllItems items={this.state.items} handleDelete={this.handleDelete} handleUpdate = {this.handleUpdate}/>
             </div>
         )
