@@ -2,11 +2,14 @@ import React from "react"
 import AllItems from 'components/items/AllItems'
 import NewItem from 'components/items/NewItem'
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 class ItemsContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            items: []
+            items: [],
+            message:""
         };
         this.handleFormSubmit= this.handleFormSubmit.bind(this)
         this.addNewItem= this.addNewItem.bind(this)
@@ -17,6 +20,7 @@ class ItemsContainer extends React.Component {
         this.triggerSearch = this.triggerSearch.bind(this)
 
     }
+
     triggerSearch(query){
         const params={
             "q":{"name_cont":query}
@@ -39,28 +43,37 @@ class ItemsContainer extends React.Component {
             this.updateItem(item.data)
         })
         .catch(error => {
-            console.log(err);
+            Object.keys(error.response.data).forEach(function (key) {
+                var value = error.response.data[key]
+                toast.error(key + " "+ value[0]);
+            })
         });
     }
     updateItem(item){
+        let index = this.state.items.findIndex(x => x.id==item.id)
         let newItems = this.state.items.filter((f) => f.id !== item.id)
-        newItems.push(item)
+        newItems.splice(index, 0, item);
         this.setState({
             items: newItems
         })
     }
     handleFormSubmit(name,description,status){
+        var that =this
         axios.post('/api/v1/items',
             {item: {name: name, description:description,status:status} }
         )
         .then(function (response) {
-                return response
+           return response
         })
-            .then((item)=>{
-                this.addNewItem(item.data)
-            })
+        .then((item)=>{
+            this.addNewItem(item.data)
+        })
         .catch(function (error) {
-            console.log(error);
+            Object.keys(error.response.data).forEach(function (key) {
+                var value = error.response.data[key]
+                toast.error(key + " "+ value[0]);
+            })
+
         });
 
 
@@ -101,11 +114,13 @@ class ItemsContainer extends React.Component {
         //    .then((data) => {console.log(data);this.setState({ items: data }) });
     }
 
+
     render(){
         return(
             <div>
               <NewItem handleFormSubmit = {this.handleFormSubmit} triggerSearch ={this.triggerSearch} />
               <AllItems items={this.state.items} handleDelete={this.handleDelete} handleUpdate = {this.handleUpdate}/>
+                <ToastContainer />
             </div>
         )
     }

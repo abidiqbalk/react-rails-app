@@ -49,12 +49,15 @@ class Item extends React.Component {
                               <option value = "not_available">Not Available</option>
                           </select>
                       </div>
-                      <div className="col">
-                          <button className="btn sm btn-primary" onClick={(e) =>this.handleEdit(e)}>Update</button>
-                          <button className="btn sm btn-info ml-1" onClick={(e) =>this.cancelEdit(e)}>Cancel</button>
-                      </div>
+
 
                   </div>
+                    <div className="row mt-2">
+                        <div className='col'>
+                            <button className="btn sm btn-primary" onClick={(e) =>this.handleEdit(e)}>Update</button>
+                            <button className="btn sm btn-info ml-1" onClick={(e) =>this.cancelEdit(e)}>Cancel</button>
+                        </div>
+                    </div>
               </form>
               )
 
