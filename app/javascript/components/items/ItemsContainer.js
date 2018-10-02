@@ -79,8 +79,9 @@ class ItemsContainer extends React.Component {
 
     }
     addNewItem(item) {
-        let newItem = this.state.items.concat(item);
-        this.setState({ items: newItem })
+        let newItems = this.state.items
+        newItems.splice(0, 0, item);
+        this.setState({ items: newItems })
     }
     handleDelete(e,id){
         e.preventDefault()
