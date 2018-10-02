@@ -43,8 +43,8 @@ class NewItem extends React.Component {
                         <button className="btn sm btn-primary" onClick={this.handleClick.bind(this)}>Add</button>
                     </div>
                 </div>
-
                 </form>
+                <hr></hr>
                 <div className="row mt-2">
                     <div className="col-md-6">
                         <input ref='query' className="form-control" placeholder='Search Item' onChange={(e) => this.handleSearch(this)} />

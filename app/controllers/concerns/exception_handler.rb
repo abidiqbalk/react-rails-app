@@ -9,4 +9,5 @@ module ExceptionHandler
       json_response({ message: e.message }, :unprocessable_entity)
     end
   end
+
 end
