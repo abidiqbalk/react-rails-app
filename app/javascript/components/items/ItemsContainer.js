@@ -50,8 +50,9 @@ class ItemsContainer extends React.Component {
         });
     }
     updateItem(item){
+        let index = this.state.items.findIndex(x => x.id==item.id)
         let newItems = this.state.items.filter((f) => f.id !== item.id)
-        newItems.push(item)
+        newItems.splice(index, 0, item);
         this.setState({
             items: newItems
         })
