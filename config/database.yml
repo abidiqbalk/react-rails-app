@@ -6,3 +6,11 @@ development:
   username: postgres
   password: password
   port: 5432
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: react_rails_test
+  pool: 5
+  username: postgres
+  password: password
+  port: 5432
