@@ -19,6 +19,7 @@ gem 'react-rails'
 gem "font-awesome-rails"
 gem 'ransack'
 gem "foreman"
+gem 'rack-cors', require: 'rack/cors'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
