@@ -29,14 +29,13 @@ class ItemsContainer extends React.Component {
 
     }
     handleUpdate(item){
+        let that = this
         axios.put(`/api/v1/items/${item.id}`, {
             item:item
         })
         .then(response => {
+            that.updateItem(response.data)
             return response
-        })
-        .then((item)=>{
-            this.updateItem(item.data)
         })
         .catch(error => {
             console.log(err);
@@ -51,11 +50,12 @@ class ItemsContainer extends React.Component {
         })
     }
     handleFormSubmit(name,description,status){
+        let that = this
         axios.post('http://localhost:3000/api/v1/items',
             {item: {name: name, description:description,status:status} }
         )
         .then(function (response) {
-                return response
+                that.addNewItem(response.data)
         })
             .then((item)=>{
                 this.addNewItem(item.data)
@@ -72,12 +72,11 @@ class ItemsContainer extends React.Component {
     }
     handleDelete(e,id){
         e.preventDefault()
+        let that = this
         axios.delete(`/api/v1/items/${id}`
         )
             .then(function (response) {
-            })
-            .then(()=>{
-                this.deleteItem(id)
+                that.deleteItem(id)
             })
             .catch(function (error) {
                 console.log(error);
