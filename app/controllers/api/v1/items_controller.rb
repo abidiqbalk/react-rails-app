@@ -10,8 +10,12 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.create(item_params)
-    json_response(@item, :created)
+    @item = Item.new(item_params)
+    if @item.save
+      json_response(@item, :created)
+    else
+      json_response(@item.errors,:unprocessable_entity)
+    end
   end
 
   def destroy
@@ -20,8 +24,11 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def update
-    @item.update(item_params)
-    json_response(@item)
+    if @item.update(item_params)
+      json_response(@item)
+    else
+      json_response(@item.errors,:unprocessable_entity)
+    end
   end
 
 
